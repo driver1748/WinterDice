@@ -1,5 +1,8 @@
 # -*- coding:utf-8-*-
 # 全局变量管理模块
+"""
+操作全局变量的模块
+"""
 import time
 
 def _init(with_min_mode:bool = False):

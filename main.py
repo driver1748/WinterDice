@@ -1,8 +1,13 @@
-# -*- coding:utf-8-*-
+# -*- coding:utf-8-*
+# Copyright (C) 2021 WinterUnderTheSnow
 version = "v0.0.0_undeveloped"
 build = 0
 BE = True
 debug_level = 999
+
+#初始化变量
+F = False
+T = True
 
 #Import sys
 try:
@@ -16,13 +21,15 @@ for reading_argv_num in range(len(sys.argv)):
     reading_argv = reading_argv.split("=", 1)
 
 
-#初始化第三方库
+#初始化依赖库
 if debug_level >= 1:
     print("Initializing modules...")
 import os
 import json
 import socket
 from json_minify import *
+import time
+import importlib
 
 #初始化模块
 if debug_level >= 1:
@@ -49,18 +56,20 @@ print(outputs['my_name'] +outputs['booting'])
 #打开log端口
 #socket_logger = socket.socket()
 #socket_logger.bind((settings["logger_address"],settings["logger_port"]))
-#初始化变量
-F = False
-T = True
 
 #初始化规则书
 # 获取规则书列表
 #  获取文件名
 judgement_file_names = os.listdir("./judgement_modules/")
+print(judgement_file_names)
+for index in range(len(judgement_file_names)):
+    operating = judgement_file_names[index]
+
 gv.set("judgement_file_names",judgement_file_names)
 #  文件名拼接路径
 judgement_file_paths = [os.path.join("./judgement_modules/",file) for file in judgement_file_names]
 gv.set("judgement_file_paths",judgement_file_paths)
+print(judgement_file_paths)
 # 调用子模块，检查规则书是否存在问题并导入
 from modules import init_judgement_modules
 init_judgement_modules.fullrun()
