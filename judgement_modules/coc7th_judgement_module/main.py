@@ -1,6 +1,8 @@
 # -*- coding:utf-8-*-
-from modules import gv
-class importing:
+"""
+COC7th 规则书程序
+"""
+class basic_info:
     def __init__(self):
         self.base_rule = True
         self.based_on = "nothing"
