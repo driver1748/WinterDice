@@ -30,6 +30,7 @@ import socket
 from json_minify import *
 import time
 import importlib
+import threading
 
 #初始化模块
 if debug_level >= 1:
@@ -60,16 +61,17 @@ print(outputs['my_name'] +outputs['booting'])
 #初始化规则书
 # 获取规则书列表
 #  获取文件名
-judgement_file_names = os.listdir("./judgement_modules/")
-print(judgement_file_names)
-for index in range(len(judgement_file_names)):
-    operating = judgement_file_names[index]
+judgement_folder_names_raw = os.listdir("./judgement_modules/")
+judgement_folder_names = []
+print(judgement_folder_names_raw)
+avoided_files = []
+for i in range(len(judgement_folder_names_raw)):
+    if judgement_folder_names_raw[i] == "__init__.py":
+        judgement_folder_names_raw[i] = "pass"
+    else:
+        judgement_folder_names.append(judgement_folder_names_raw[i])
+gv.set("judgement_file_names",judgement_folder_names)
 
-gv.set("judgement_file_names",judgement_file_names)
-#  文件名拼接路径
-judgement_file_paths = [os.path.join("./judgement_modules/",file) for file in judgement_file_names]
-gv.set("judgement_file_paths",judgement_file_paths)
-print(judgement_file_paths)
-# 调用子模块，检查规则书是否存在问题并导入
+# 调用子模块，初始化规则书
 from modules import init_judgement_modules
 init_judgement_modules.fullrun()
