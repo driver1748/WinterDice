@@ -38,20 +38,3 @@ class init:
         返回字典格式的基本信息
         """
         return self.info_dict
-    def init(self):
-        """
-        反向获取自己的相关信息
-        """
-        _self = gv.get()
-
-class ra: #ra指令
-    def __init__(self):
-        pass
-    def execute(self, skill_name:str, rate:int):
-        try:
-            #判定部分
-            result = randint(1,100)
-            if result == gv.get():
-                pass
-        except:
-            return(gv.get("outputs")["wrong_command"])

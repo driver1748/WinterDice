@@ -39,7 +39,12 @@ def fullrun():
                 judgement_modules_map[literal_name] = _init.getdict() #将规则书的基本信息写入字典中
                 #遍历注册规则书中的命令，将指令与规则书绑定
                 for j in range(len(_init.register_commands)):
-                    command_reg[_init.register_commands[j]] = judgement_modules_map["list"][index]
+                    if _init.register_commands[j] in command_reg:
+                        print("冲突")
+                    else:
+                        print(str(j)+" "+str(index))
+                        command_reg[_init.register_commands[j]] = judgement_modules_map["list"][index]
+                        print(command_reg)
                 index += 1 #每次成功导入就把index加1，方便下一个规则书的指令绑定
             except FileNotFoundError:
                 pass
