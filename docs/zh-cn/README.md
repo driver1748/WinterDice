@@ -1,1 +1,2 @@
-#欢迎来到WinterDice的文档！
+#Welcome to WinterDice Docs!
+Choose your language in the above fileholders.
