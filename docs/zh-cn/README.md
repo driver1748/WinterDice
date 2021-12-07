@@ -1,0 +1,1 @@
+#欢迎来到WinterDice的文档！
