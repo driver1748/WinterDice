@@ -20,33 +20,27 @@ for reading_argv_num in range(len(sys.argv)):
     reading_argv = sys.argv[reading_argv_num]
     reading_argv = reading_argv.split("=", 1)
 
+#初始化模块
+from modules import global_values as gv
+gv._init()
+from modules import events
+events._init()
 
 #初始化依赖库
-if debug_level >= 1:
-    print("Initializing modules...")
 import os
 import json
 import socket
 from json_minify import *
 import time
 import importlib
-import threading
+import _thread
 
-#初始化模块
-if debug_level >= 1:
-    print("Initializing built-in modules...")
-from modules import global_values as gv
-gv._init()
 
 #读取设置和回应字典
-if debug_level >= 2:
-    print("Reading settings...")
 with open(r"settings.json", "r", encoding="utf-8") as settings:
     settings = settings.read()
     settings = json.loads(json_minify(settings))
 gv.set("settings",settings)
-if debug_level >= 2:
-    print("Reading outputs...")
 with open(r"output_texts.json", "r", encoding="utf-8") as outputs:
     outputs = outputs.read()
     outputs = json.loads(json_minify(outputs))
@@ -63,7 +57,6 @@ print(outputs['my_name'] +outputs['booting'])
 #  获取文件名
 judgement_folder_names_raw = os.listdir("./judgement_modules/")
 judgement_folder_names = []
-print(judgement_folder_names_raw)
 avoided_files = []
 for i in range(len(judgement_folder_names_raw)):
     if judgement_folder_names_raw[i] == "__init__.py":

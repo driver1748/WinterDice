@@ -6,6 +6,14 @@
     "booting": "正在挨透哦！",
     //加载规则书文件消息
     "loading_rules": "正在加载规则书文件！",
+    //规则书指令冲突消息
+    "command_confliction": {
+        "judgement_module": "规则书",
+        "in": "中的",
+        "command": "指令",
+        "is_already": "已经被",
+        "is_registered_and_skip": "注册，跳过前者中这一指令的注册"
+    },
     //指令格式错误消息
     "wrong_command": "指令格式错误！"
 }

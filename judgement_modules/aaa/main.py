@@ -2,7 +2,7 @@
 """
 COC7th 规则书程序
 """
-class init:
+class init(object):
     """
     定义规则书基本信息，并进行初始化
     """
@@ -18,8 +18,8 @@ class init:
         #基本信息
         self.base_rule = True
         self.based_on = "nothing"
-        self.full_name = "Call Of Cthulu 7th"
-        self.name = "COC7th"
+        self.full_name = "aaa"
+        self.name = "bbb"
         
         #将要注册的命令
         self.register_commands = ["ra","r","coc"]

@@ -1,18 +1,20 @@
 # -*- coding:utf-8-*-
+# Copyright (C) 2021 WinterUnderTheSnow
 #检查并初始化规则书
 """
 用于检查并初始化规则书的模块
 """
 
-from modules import global_values as gv
-import importlib
-import hashlib
-
-judgement_modules_map = {"list":[],"list2module":{},"module2list":{}}
 def fullrun():
     """
     检查并初始化规则书程序
     """
+    from modules import global_values as gv
+    import importlib
+
+    command_confliction = gv.get("outputs")["command_confliction"]
+
+    judgement_modules_map = {"list":[]}
     command_reg = {} #创建指令注册表空字典
     judgement_file_names = gv.get("judgement_file_names")
     #遍历所有规则书
@@ -22,29 +24,32 @@ def fullrun():
             pass
         else:
             try:
-                file_path = ".\\judgement_modules\\"+ judgement_file_names[i] +"\\main.py"
-                #计算文件MD5作为规则书ID
-                with open(file_path, "r", encoding="utf-8") as raw_file:
-                    literal_name = hashlib.md5(str(raw_file).encode()).hexdigest()
-                    print(literal_name)
                 #通过动态加载模块的方式导入规则书
                 judgement_module = importlib.import_module("judgement_modules."+judgement_file_names[i]+".main")
                 #调用规则书模块
                 _init = getattr(judgement_module,"init")
-                _init = _init()
+                _init = _init() #初始化init类（执行__init__函数）
                 #进行初始化
-                judgement_modules_map["list"].append(literal_name) #往规则书列表中写入规则书ID
-                judgement_modules_map["list2module"][literal_name] = judgement_module #将ID指向规则书模块
-                judgement_modules_map["module2list"][judgement_module] = "a"
-                judgement_modules_map[literal_name] = _init.getdict() #将规则书的基本信息写入字典中
+                judgement_modules_map["list"].append(judgement_module)
                 #遍历注册规则书中的命令，将指令与规则书绑定
                 for j in range(len(_init.register_commands)):
                     if _init.register_commands[j] in command_reg:
-                        print("冲突")
+                        conflicted_with = command_reg[_init.register_commands[j]].init()
+                        print(
+                            str(
+                            command_confliction["judgement_module"] + "  " +
+                            _init.full_name + "  " +
+                            command_confliction["in"] + "  " +
+                            _init.register_commands[j] + "  " +
+                            command_confliction["command"] +
+                            command_confliction["is_already"] + "  " +
+                            conflicted_with.full_name + "  " +
+                            command_confliction["judgement_module"] +
+                            command_confliction["is_registered_and_skip"]
+                            )
+                        )
                     else:
-                        print(str(j)+" "+str(index))
-                        command_reg[_init.register_commands[j]] = judgement_modules_map["list"][index]
-                        print(command_reg)
+                        command_reg[_init.register_commands[j]] = judgement_module
                 index += 1 #每次成功导入就把index加1，方便下一个规则书的指令绑定
             except FileNotFoundError:
                 pass

@@ -1,8 +1,10 @@
 # -*- coding:utf-8-*-
+# Copyright (C) 2021 WinterUnderTheSnow
 """
 COC7th 规则书程序
 """
-class init:
+
+class init(object):
     """
     定义规则书基本信息，并进行初始化
     """
