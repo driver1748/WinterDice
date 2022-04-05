@@ -37,11 +37,11 @@ import _thread
 
 
 #读取设置和回应字典
-with open(r"settings.json", "r", encoding="utf-8") as settings:
+with open(r"settings.jsonc", "r", encoding="utf-8") as settings:
     settings = settings.read()
     settings = json.loads(json_minify(settings))
 gv.set("settings",settings)
-with open(r"output_texts.json", "r", encoding="utf-8") as outputs:
+with open(r"output_texts.jsonc", "r", encoding="utf-8") as outputs:
     outputs = outputs.read()
     outputs = json.loads(json_minify(outputs))
 gv.set("outputs",outputs)
@@ -63,7 +63,7 @@ for i in range(len(judgement_folder_names_raw)):
         judgement_folder_names_raw[i] = "pass"
     else:
         judgement_folder_names.append(judgement_folder_names_raw[i])
-gv.set("judgement_file_names",judgement_folder_names)
+gv.set("judgement_file_gnames",judgement_folder_names)
 
 # 调用子模块，初始化规则书
 from modules import init_judgement_modules
