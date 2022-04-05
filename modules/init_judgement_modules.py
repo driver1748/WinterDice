@@ -1,5 +1,5 @@
 # -*- coding:utf-8-*-
-# Copyright (C) 2021 WinterUnderTheSnow
+# Copyright (C) 2022 WinterUnderTheSnow
 #检查并初始化规则书
 """
 用于检查并初始化规则书的模块
@@ -24,7 +24,6 @@ def fullrun():
             pass
         else:
             try:
-                print(judgement_file_names)
                 #通过动态加载模块的方式导入规则书
                 judgement_module = importlib.import_module("judgement_modules."+judgement_file_names[i]+".main")
                 #调用规则书模块
@@ -36,6 +35,7 @@ def fullrun():
                 for j in range(len(_init.register_commands)):
                     if _init.register_commands[j] in command_reg:
                         conflicted_with = command_reg[_init.register_commands[j]].init()
+                        #规则书间指令冲突的提示信息
                         print(
                             str(
                             command_confliction["judgement_module"] + "  " +
@@ -46,14 +46,16 @@ def fullrun():
                             command_confliction["is_already"] + "  " +
                             conflicted_with.full_name + "  " +
                             command_confliction["judgement_module"] +
-                            command_confliction["is_registered_and_skip"]
+                            command_confliction["is_registered_and_skip"] +
+                            command_confliction["useless"]
                             )
                         )
                     else:
-                        command_reg[_init.register_commands[j]] = judgement_module
+                        command_reg[_init.register_commands[j]] = judgement_module #把指令关键字所对应的规则书记录到command_reg小本本上
                 index += 1 #每次成功导入就把index加1，方便下一个规则书的指令绑定
             except FileNotFoundError:
                 pass
     #完成规则书初始化，返回处理过的结果
     gv.set("judgement_modules_map", judgement_modules_map)
     gv.set("command_reg", command_reg)
+    return (judgement_modules_map, command_reg)

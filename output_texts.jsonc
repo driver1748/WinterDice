@@ -12,10 +12,14 @@
         "in": "中的",
         "command": "指令",
         "is_already": "已经被",
-        "is_registered_and_skip": "注册，跳过前者中这一指令的注册"
+        "is_registered_and_skip": "注册，跳过前者中这一指令的注册",
+        "useless": "，被跳过的指令将无法使用！"
     },
     //指令格式错误消息
     "wrong_command": "指令格式错误！",
     //初始化完成消息
-    "init_complete": "初始化完成！"
+    "init_complete": "初始化完成！",
+    //指令有歧义
+    "mutiple_purposes": "您输入的指令有歧义。",
+    "please_enter_number": "请输入您想执行的指令所对应的数字。"
 }

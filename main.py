@@ -1,13 +1,10 @@
 # -*- coding:utf-8-*
-# Copyright (C) 2021 WinterUnderTheSnow
+# Copyright (C) 2022 WinterUnderTheSnow
 version = "v0.0.0_undeveloped"
 build = 0
 BE = True
 debug_level = 999
 
-#初始化变量
-F = False
-T = True
 
 #Import sys
 try:
@@ -33,7 +30,6 @@ import socket
 from json_minify import *
 import time
 import importlib
-import _thread
 
 
 #读取设置和回应字典
@@ -45,6 +41,10 @@ with open(r"output_texts.jsonc", "r", encoding="utf-8") as outputs:
     outputs = outputs.read()
     outputs = json.loads(json_minify(outputs))
 gv.set("outputs",outputs)
+
+print("# Copyright (C) 2022 WinterUnderTheSnow All rights reserved")
+print("# This program is licensed under GPLv3 !")
+print("")
 
 print(outputs['my_name'] +outputs['booting'])
 
@@ -67,11 +67,27 @@ gv.set("judgement_file_names",judgement_folder_names)
 
 # 调用子模块，初始化规则书
 from modules import init_judgement_modules
-init_judgement_modules.fullrun()
+judgement_modules_map, command_reg = init_judgement_modules.fullrun()
+keys_list = list(command_reg.keys())
 
 #开始接受指令
 print(outputs["init_complete"])
 while True:
-    command = str(input("> "))
-    if command == "quit" or command == "q":
+    command = str(input("> ")) #这是一个指示光标
+    if command == "quit" or command == "Q": #输入这个即退出
         sys.exit()
+    if command == "reload" or command == "R": #输入这个即重载规则书
+        judgement_modules_map, command_reg = init_judgement_modules.fullrun()
+        keys_list = list(command_reg.keys())
+    if command[0:1] == "." or command[0:1] == "。": #带点的命令全部交给规则书处理
+        standard_command = command[1:len(command)+1] #把点去掉
+        #因为考虑到不是所有指令都在关键字与参数间有空格，所以判断方法为：用command_reg中的所有命令去遍历字符串
+        trigger_list = []
+        for i in range(len(keys_list)):
+            find_result = standard_command.find(keys_list[i],0,len(keys_list[i])) #检测指令关键字，即第1到第（关键字长度+1）个字符是否为关键字
+            if find_result == -1:
+                pass
+            else:
+                trigger_list.append(i) #小Magic，保存匹配上的索引而不是关键词
+        if len(trigger_list) > 1:
+            print(outputs["multiple_purposes"])

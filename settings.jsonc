@@ -1,6 +1,6 @@
 // coding: utf-8
 {
-    //输出log的目标地址与端口
+    //输出log的目标地址与端口，暂时没有用处
     "logger_address": "127.0.0.1",
     "logger_port": 17490
 }
