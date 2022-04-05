@@ -15,5 +15,7 @@
         "is_registered_and_skip": "注册，跳过前者中这一指令的注册"
     },
     //指令格式错误消息
-    "wrong_command": "指令格式错误！"
+    "wrong_command": "指令格式错误！",
+    //初始化完成消息
+    "init_complete": "初始化完成！"
 }

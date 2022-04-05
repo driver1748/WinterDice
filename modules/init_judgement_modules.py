@@ -24,6 +24,7 @@ def fullrun():
             pass
         else:
             try:
+                print(judgement_file_names)
                 #通过动态加载模块的方式导入规则书
                 judgement_module = importlib.import_module("judgement_modules."+judgement_file_names[i]+".main")
                 #调用规则书模块

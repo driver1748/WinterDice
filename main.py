@@ -63,8 +63,15 @@ for i in range(len(judgement_folder_names_raw)):
         judgement_folder_names_raw[i] = "pass"
     else:
         judgement_folder_names.append(judgement_folder_names_raw[i])
-gv.set("judgement_file_gnames",judgement_folder_names)
+gv.set("judgement_file_names",judgement_folder_names)
 
 # 调用子模块，初始化规则书
 from modules import init_judgement_modules
 init_judgement_modules.fullrun()
+
+#开始接受指令
+print(outputs["init_complete"])
+while True:
+    command = str(input("> "))
+    if command == "quit" or command == "q":
+        sys.exit()
