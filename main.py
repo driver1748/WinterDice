@@ -87,14 +87,14 @@ def try_to_get_int():
 #开始接受指令
 print(outputs["init_complete"])
 while True:
-    command = str(input("> ")) #这是一个指示光标
-    if command == "quit" or command == "Q": #输入这个即退出
+    raw_command = str(input("> ")) #这是一个指示光标
+    command = raw_command.lower() #全部改成小写方便程序判断
+    if command == "quit" or command == "q": #输入这个即退出
         sys.exit()
-    if command == "reload" or command == "R": #输入这个即重载规则书
-        judgement_modules_map, command_reg = init_judgement_modules.fullrun()
-        keys_list = list(command_reg.keys())
+    if command == "help" or command == "h": #HALP
+        pass
     if command[0:1] == "." or command[0:1] == "。": #带点的命令全部交给规则书处理
-        standard_command = command[1:len(command)+1] #把点去掉
+        standard_command = raw_command[1:len(command)+1] #把点去掉
         #因为考虑到不是所有指令都在关键字与参数间有空格，所以判断方法为：用command_reg中的所有命令去遍历字符串
         trigger_list = []
         for i in range(len(keys_list)):
@@ -103,6 +103,7 @@ while True:
                 pass
             else:
                 trigger_list.append(i) #小Magic，保存匹配上的索引而不是关键词
+            # 到这里判断就完成了，下面是让用户选择执行
         if len(trigger_list) > 1: #如果匹配到的关键词多于一个，那就让用户选一个命令执行
             print(outputs["multiple_purposes"])
             trigger_choice_list = ""

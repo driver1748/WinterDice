@@ -24,8 +24,8 @@ class init(object):
         #基本信息
         self.base_rule = True
         self.based_on = "nothing"
-        self.full_name = "Call Of Cthulu 7th"
-        self.name = "COC7th"
+        self.full_name = "NTERAL JUDGEMENT MODULE"
+        self.name = "INTERAL"
         
         #将要注册的命令
         self.register_commands = ["r"]
