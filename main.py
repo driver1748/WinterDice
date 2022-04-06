@@ -20,8 +20,6 @@ for reading_argv_num in range(len(sys.argv)):
 #初始化模块
 from modules import global_values as gv
 gv._init()
-from modules import events
-events._init()
 
 #初始化依赖库
 import os
