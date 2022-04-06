@@ -2,6 +2,7 @@
 """
 COC7th 规则书程序
 """
+
 class init(object):
     """
     定义规则书基本信息，并进行初始化
@@ -15,6 +16,10 @@ class init(object):
         from random import randint
         from modules import global_values as gv
         global _self
+        global response_classes
+        from modules import response_classes
+
+
         #基本信息
         self.base_rule = True
         self.based_on = "nothing"
@@ -22,7 +27,7 @@ class init(object):
         self.name = "bbb"
         
         #将要注册的命令
-        self.register_commands = ["ra","r","coc"]
+        self.register_commands = ["ra","r","coc","rac"]
 
 
         #生成字典方便操作

@@ -44,6 +44,15 @@ print("# Copyright (C) 2022 WinterUnderTheSnow All rights reserved")
 print("# This program is licensed under GPLv3 !")
 print("")
 
+if settings["show_update_log"]:
+    try:
+        with open(r"update_log.txt", "r", encoding="utf-8") as update_log:
+            update_log = update_log.read()
+            print(update_log)
+    except FileNotFoundError:
+        pass
+
+
 print(outputs['my_name'] +outputs['booting'])
 
 #打开log端口
@@ -68,6 +77,13 @@ from modules import init_judgement_modules
 judgement_modules_map, command_reg = init_judgement_modules.fullrun()
 keys_list = list(command_reg.keys())
 
+#封装一些需要用的函数
+def try_to_get_int():
+    try:
+        return int(input("> "))
+    except TypeError:
+        try_to_get_int()
+
 #开始接受指令
 print(outputs["init_complete"])
 while True:
@@ -87,5 +103,10 @@ while True:
                 pass
             else:
                 trigger_list.append(i) #小Magic，保存匹配上的索引而不是关键词
-        if len(trigger_list) > 1:
+        if len(trigger_list) > 1: #如果匹配到的关键词多于一个，那就让用户选一个命令执行
             print(outputs["multiple_purposes"])
+            trigger_choice_list = ""
+            for i in range(len(trigger_list)): #生成列表
+                trigger_choice_list = trigger_choice_list + "[" + str(i) + "] " + keys_list[trigger_list[i]] + " "
+            print(trigger_choice_list)
+

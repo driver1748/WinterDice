@@ -28,7 +28,7 @@ class init(object):
         self.name = "COC7th"
         
         #将要注册的命令
-        self.register_commands = ["ra","r","coc"]
+        self.register_commands = ["r"]
 
 
         #生成字典方便操作
@@ -52,11 +52,13 @@ class init(object):
 
 class ra(object): #ra指令
     def __init__(self, parameter):
-        #先拿到技能成功率
-        skills = gv.get("skills")
-        if skills == "Not Found":
-            have_skill = False
-        else:
-            have_skill = True
         #先尝试分割参数
-        
+        my_list = parameter.split("d",1)
+        if len(my_list) > 1:
+            pass
+        else:
+            my_list = parameter.split("D",1)
+            if len(my_list) > 1:
+                pass
+            else:
+                pass
