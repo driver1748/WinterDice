@@ -23,7 +23,7 @@ class init(object):
         self.name = "INTERNAL"
         
         #将要注册的命令
-        self.register_commands = ["r","bot"]
+        self.register_commands = ["bot"]
 
 
         #生成字典方便操作
@@ -32,11 +32,6 @@ class init(object):
             "name": self.name,
             "register_commands": self.register_commands
         }
-
-class r(object): #.r指令
-    def __init__(self, parameter:str=None):
-        r_parameter = parameter.lower()
-
 
 class bot(object): #.bot指令
     def __init__(self,parameter:str=None):
