@@ -1,9 +1,9 @@
 // encoding: utf-8
 {
     //骰娘名字
-    "my_name":"开心",
+    "my_name":"WinterDice",
     //骰娘启动消息
-    "booting": "正在挨透哦！",
+    "booting": "正在启动。",
     //加载规则书文件消息
     "loading_rules": "正在加载规则书文件！",
     //显示规则书指令列表时的提示
