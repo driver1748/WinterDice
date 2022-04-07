@@ -51,20 +51,7 @@ def fullrun():
                         if _init.register_commands[j] in command_reg:
                             conflicted_with = command_reg[_init.register_commands[j]].init() #获取已经注册的指令所对应的规则书
                             #规则书间指令冲突的提示信息
-                            print(
-                                str(
-                                outputs["command_confliction"]["judgement_module"] + "  " +
-                                _init.full_name + "  " +
-                                outputs["command_confliction"]["in"] + "  " +
-                                _init.register_commands[j] + "  " +
-                                outputs["command_confliction"]["command"] +
-                                outputs["command_confliction"]["is_already"] + "  " +
-                                conflicted_with.full_name + "  " +
-                                outputs["command_confliction"]["judgement_module"] +
-                                outputs["command_confliction"]["is_registered_and_skip"] +
-                                outputs["command_confliction"]["useless"]
-                                )
-                            )
+                            print(outputs["command_confliction"] % (_init.full_name, _init.register_commands[j], conflicted_with.full_name))
                         else:
                             command_reg[_init.register_commands[j]] = judgement_module #把指令关键字所对应的规则书记录到command_reg小本本上
                     except:

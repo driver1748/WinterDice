@@ -9,14 +9,7 @@
     //显示规则书指令列表时的提示
     "remind_dot": "注意：只有开头为.或。的指令才会被当作规则书指令执行。",
     //规则书指令冲突消息
-    "command_confliction": {
-        "judgement_module": "规则书",
-        "in": "中的",
-        "command": "指令",
-        "is_already": "已经被",
-        "is_registered_and_skip": "注册，跳过前者中这一指令的注册",
-        "useless": "，被跳过的指令将无法使用！"
-    },
+    "command_confliction": "规则书 %s 中的 %s 指令已经被 %s 规则书注册，前者将无法使用。",
     //表达式错误消息
     "wrong_expression": "表达式有误！",
     //初始化完成消息

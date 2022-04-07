@@ -45,7 +45,7 @@ try:
         outputs = outputs.read()
         outputs = json.loads(json_minify(outputs))
 except FileNotFoundError:
-    outputs = '{"my_name":"开心","booting":"正在挨透哦！","loading_rules":"正在加载规则书文件！","remind_dot":"注意：只有开头为.或。的指令才会被当作规则书指令执行。","command_confliction":{"judgement_module":"规则书","in":"中的","command":"指令","is_already":"已经被","is_registered_and_skip":"注册，跳过前者中这一指令的注册","useless":"，被跳过的指令将无法使用！"},"wrong_expression":"表达式有误！","init_complete":"初始化完成！共加载%i本规则书。","skill_set":"属性设置成功！","skills_cleared":"属性设定已清空！","show_skill":"%s 技能的属性值为： %i","multiple_purposes":"您输入的指令有歧义。请输入您想执行的指令所对应的数字。","please_enter_int_between":"输入有误！请输入 %i 到 %i 间的整数！","judgement_module_error":"%s 规则书中的 %s 指令有问题！这条指令将不能使用。","illegal_char":"表达式含有非法字符！","help":["内置指令：","q或quit - 退出","h或help - 显示帮助","l或list - 显示所有已加载的规则书","c或commands - 显示所有可用的规则书命令","v或version - 显示软件版本","以.或。开头的任何输入都会被视作规则书命令（除了.st，但效果相同）"]}'
+    outputs = '{"my_name":"开心","booting":"正在挨透哦！","loading_rules":"正在加载规则书文件！","remind_dot":"注意：只有开头为.或。的指令才会被当作规则书指令执行。","command_confliction":"规则书 %s 中的 %s 指令已经被 %s 规则书注册，前者将无法使用。","wrong_expression":"表达式有误！","init_complete":"初始化完成！共加载%i本规则书。","skill_set":"属性设置成功！","skills_cleared":"属性设定已清空！","show_skill":"%s 技能的属性值为： %i","multiple_purposes":"您输入的指令有歧义。请输入您想执行的指令所对应的数字。","please_enter_int_between":"输入有误！请输入 %i 到 %i 间的整数！","judgement_module_error":"%s 规则书中的 %s 指令有问题！这条指令将不能使用。","illegal_char":"表达式含有非法字符！","help":["内置指令：","q或quit - 退出","h或help - 显示帮助","l或list - 显示所有已加载的规则书","c或commands - 显示所有可用的规则书命令","v或version - 显示软件版本","以.或。开头的任何输入都会被视作规则书命令（除了.st，但效果相同）"]}'
 gv.set("outputs",outputs)
 
 skill_file_exists = False
