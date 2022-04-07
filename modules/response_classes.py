@@ -2,6 +2,7 @@
 # Copyright (C) 2022 WinterUnderTheSnow
 """定义规则书回应的类"""
 
+# 要注意的是，只有text里的内容玩家会看到，是否成功和附加的数值都是给程序处理的
 class response(object):
     """基本回应，只包含文字"""
     def __init__(self,text=None) -> None:

@@ -6,6 +6,8 @@
     "booting": "正在挨透哦！",
     //加载规则书文件消息
     "loading_rules": "正在加载规则书文件！",
+    //显示规则书指令列表时的提示
+    "remind_dot": "注意：只有开头为.或。的指令才会被当作规则书指令执行。",
     //规则书指令冲突消息
     "command_confliction": {
         "judgement_module": "规则书",
@@ -18,9 +20,21 @@
     //指令格式错误消息
     "wrong_command": "指令格式错误！",
     //初始化完成消息
-    "init_complete": "初始化完成！",
+    "init_complete": "初始化完成！共加载%i本规则书。",
     //指令有歧义
     "multiple_purposes": "您输入的指令有歧义。请输入您想执行的指令所对应的数字。",
-    //规则书重载完成
-    "reload_complete": "规则书重载完成！"
+    //请输入几到几间的整数
+    "please_enter_int_between": "输入有误！请输入 %i 到 %i 间的整数！",
+    //规则书有问题
+    "judgement_module_error": "%s 规则书中的 %s 指令有问题！这条指令将不能使用。",
+    //HELP
+    "help":[
+        "内置指令：",
+        "q或quit - 退出",
+        "h或help - 显示帮助",
+        "l或list - 显示所有已加载的规则书",
+        "c或commands - 显示所有可用的规则书命令",
+        "v或version - 显示软件版本",
+        "以.或。开头的任何输入都会被视作规则书命令"
+    ]
 }
