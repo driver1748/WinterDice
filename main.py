@@ -6,11 +6,7 @@ BE = True
 debug_level = 999
 
 #Import sys
-try:
-    import sys
-except:
-    print("Fatal : Failed to import sys!!")
-    raise Exception("Failed to import sys!Exiting...")
+import sys
 sys.dont_write_bytecode = True
 for reading_argv_num in range(len(sys.argv)):
     reading_argv = sys.argv[reading_argv_num]
@@ -18,7 +14,7 @@ for reading_argv_num in range(len(sys.argv)):
 
 #初始化模块
 from aifc import Error
-from modules import global_values as gv, response_classes
+from modules import global_values as gv, response_classes, st
 gv._init()
 
 gv.set("version",version)
@@ -36,16 +32,31 @@ import socket
 from json_minify import *
 import time
 
-
-#读取设置和回应字典
-with open(r"settings.jsonc", "r", encoding="utf-8") as settings:
-    settings = settings.read()
-    settings = json.loads(json_minify(settings))
+#读取设置和回应字典以及技能
+try:
+    with open(r"settings.jsonc", "r", encoding="utf-8") as settings:
+        settings = settings.read()
+        settings = json.loads(json_minify(settings))
+except FileNotFoundError:
+    settings = json.loads('{"show_update_log":true}')
 gv.set("settings",settings)
-with open(r"output_texts.jsonc", "r", encoding="utf-8") as outputs:
-    outputs = outputs.read()
-    outputs = json.loads(json_minify(outputs))
+try:
+    with open(r"output_texts.jsonc", "r", encoding="utf-8") as outputs:
+        outputs = outputs.read()
+        outputs = json.loads(json_minify(outputs))
+except FileNotFoundError:
+    outputs = None
 gv.set("outputs",outputs)
+
+skill_file_exists = False
+try:
+    with open(r"skills.jsonc", "r",encoding="utf-8") as skill_file:
+        skill_file_exists = True
+        skills_json = skill_file.read()
+        skills = json.loads(json_minify(skills_json))
+except:
+    skills = {}
+gv.set("skills",skills)
 
 print("# Copyright (C) 2022 WinterUnderTheSnow All rights reserved")
 print("# This program is licensed under GPLv3 !")
@@ -117,6 +128,25 @@ while True:
     if command == "commands" or command == "c": #显示已加载的规则书指令
         print(keys_list)
         print(outputs["remind_dot"])
+    if command[0:3] == ".st" or command[0:3] == "。st": #傻乎乎的但是能用的.st
+        skill_file_exists = False
+        try:
+            with open(r"skills.jsonc","r",encoding="utf-8") as skill_file:
+                skill_file_exists = True
+                skills_json = skill_file.read()
+                skills = json.loads(json_minify(skills_json))
+        except:
+            skills = {}
+        skills = st.run(command,outputs,skills)
+        gv.set("skills",skills)
+        if skill_file_exists:
+            with open(r"skills.jsonc","a+",encoding="utf-8") as skill_file:
+                skill_file.seek(0)
+                skill_file.truncate()
+                skill_file.write(json_minify(json.dumps(skills)))
+        else:
+            with open(r"skills.jsonc","x",encoding="utf-8") as skill_file:
+                skill_file.write(json_minify(json.dumps(skills)))
     if command[0:1] == "." or command[0:1] == "。": #带点的命令全部交给规则书处理
         standard_command = raw_command[1:len(command)+1] #把点去掉
         #因为考虑到不是所有指令都在关键字与参数间有空格，所以判断方法为：用command_reg中的所有命令去遍历字符串
