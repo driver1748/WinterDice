@@ -1,4 +1,4 @@
-// coding: utf-8
+// encoding: utf-8
 {
     //骰娘名字
     "my_name":"开心",
@@ -21,10 +21,12 @@
     "wrong_expression": "表达式有误！",
     //初始化完成消息
     "init_complete": "初始化完成！共加载%i本规则书。",
-    //已清楚属性设定
+    //属性设置成功
+    "skill_set": "属性设置成功！",
+    //已清除属性设定
     "skills_cleared": "属性设定已清空！",
     //xxx技能的属性为
-    "show_skill": "%s 技能的属性为： %i",
+    "show_skill": "%s 技能的属性值为： %i",
     //指令有歧义
     "multiple_purposes": "您输入的指令有歧义。请输入您想执行的指令所对应的数字。",
     //请输入几到几间的整数
